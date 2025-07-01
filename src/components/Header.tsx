@@ -2,8 +2,8 @@ import React from 'react';
 import { FileText, Plus, History } from 'lucide-react';
 
 interface HeaderProps {
-  activeTab: string;
-  onTabChange: (tab: string) => void;
+  activeTab: 'create' | 'preview' | 'history';
+  onTabChange: (tab: 'create' | 'preview' | 'history') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {

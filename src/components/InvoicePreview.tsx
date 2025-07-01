@@ -110,8 +110,8 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({
                 <tr className="border-b-2 border-gray-300">
                   <th className="text-left py-3 font-semibold text-slate-900">Description</th>
                   <th className="text-center py-3 font-semibold text-slate-900 w-20">Qty</th>
-                  <th className="text-right py-3 font-semibold text-slate-900 w-24">Rate</th>
-                  <th className="text-right py-3 font-semibold text-slate-900 w-24">Amount</th>
+                  <th className="text-right py-3 font-semibold text-slate-900 w-24">Rate(Ksh)</th>
+                  <th className="text-right py-3 font-semibold text-slate-900 w-24">Amount(Ksh)</th>
                 </tr>
               </thead>
               <tbody>
@@ -119,8 +119,8 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({
                   <tr key={item.id} className="border-b border-gray-200">
                     <td className="py-3 text-slate-800">{item.description}</td>
                     <td className="py-3 text-center text-slate-800">{item.quantity}</td>
-                    <td className="py-3 text-right text-slate-800">${item.rate.toFixed(2)}</td>
-                    <td className="py-3 text-right font-medium text-slate-800">${item.amount.toFixed(2)}</td>
+                    <td className="py-3 text-right text-slate-800">{item.rate.toFixed(2)}</td>
+                    <td className="py-3 text-right font-medium text-slate-800">{item.amount.toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -133,25 +133,25 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span className="font-medium">${invoice.subtotal.toFixed(2)}</span>
+                  <span className="font-medium">{invoice.subtotal.toFixed(2)}</span>
                 </div>
                 
                 {invoice.discount > 0 && (
                   <div className="flex justify-between text-green-600">
                     <span>Discount:</span>
-                    <span>-${((invoice.subtotal * invoice.discount) / 100).toFixed(2)}</span>
+                    <span>-{((invoice.subtotal * invoice.discount) / 100).toFixed(2)}</span>
                   </div>
                 )}
                 
                 <div className="flex justify-between">
                   <span className="text-gray-600">Tax ({invoice.taxRate}%):</span>
-                  <span className="font-medium">${invoice.taxAmount.toFixed(2)}</span>
+                  <span className="font-medium">{invoice.taxAmount.toFixed(2)}</span>
                 </div>
                 
                 <div className="border-t-2 border-gray-300 pt-2">
                   <div className="flex justify-between text-xl font-bold">
-                    <span className="text-slate-900">Total:</span>
-                    <span className="text-blue-600">${invoice.total.toFixed(2)}</span>
+                    <span className="text-slate-900">Total (Ksh):</span>
+                    <span className="text-blue-600">{invoice.total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>

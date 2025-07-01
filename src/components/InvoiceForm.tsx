@@ -29,7 +29,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
     taxRate: 10,
     discount: 0,
     notes: '',
-    template: 'professional' as const,
+    template: 'professional' as 'professional' | 'modern' | 'minimal',
   });
 
   const [totals, setTotals] = useState({
@@ -106,18 +106,16 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">Create New Invoice</h2>
-        
-        <form onSubmit={handleSubmit} className="space-y-8">
+    <div className="max-w-4xl mx-auto p-2 sm:p-4 md:p-6">
+      <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 md:p-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">Create New Invoice</h2>
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
           {/* Client Information */}
-          <div className="bg-gray-50 rounded-lg p-6">
+          <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
             <div className="flex items-center space-x-2 mb-4">
               <User className="h-5 w-5 text-blue-600" />
               <h3 className="text-lg font-semibold text-gray-900">Client Information</h3>
             </div>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -194,7 +192,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
           </div>
 
           {/* Invoice Details */}
-          <div className="bg-gray-50 rounded-lg p-6">
+          <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
             <div className="flex items-center space-x-2 mb-4">
               <Calendar className="h-5 w-5 text-blue-600" />
               <h3 className="text-lg font-semibold text-gray-900">Invoice Details</h3>
@@ -231,7 +229,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
                 </label>
                 <select
                   value={invoiceData.template}
-                  onChange={(e) => setInvoiceData({ ...invoiceData, template: e.target.value as any })}
+                  onChange={(e) => setInvoiceData({ ...invoiceData, template: e.target.value as 'professional' | 'modern' | 'minimal' })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="professional">Professional</option>
@@ -243,8 +241,8 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
           </div>
 
           {/* Items */}
-          <div className="bg-gray-50 rounded-lg p-6">
-            <div className="flex items-center justify-between mb-4">
+          <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2">
               <div className="flex items-center space-x-2">
                 <DollarSign className="h-5 w-5 text-blue-600" />
                 <h3 className="text-lg font-semibold text-gray-900">Invoice Items</h3>
@@ -252,17 +250,16 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
               <button
                 type="button"
                 onClick={addItem}
-                className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors mt-2 sm:mt-0"
               >
                 <Plus className="h-4 w-4" />
                 <span>Add Item</span>
               </button>
             </div>
-            
             <div className="space-y-4">
-              {items.map((item, index) => (
-                <div key={item.id} className="grid grid-cols-12 gap-4 items-end">
-                  <div className="col-span-5">
+              {items.map((item) => (
+                <div key={item.id} className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
+                  <div className="sm:col-span-5">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Description
                     </label>
@@ -275,7 +272,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
                     />
                   </div>
                   
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Quantity
                     </label>
@@ -288,7 +285,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
                     />
                   </div>
                   
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Rate
                     </label>
@@ -302,7 +299,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
                     />
                   </div>
                   
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Amount
                     </label>
@@ -311,7 +308,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
                     </div>
                   </div>
                   
-                  <div className="col-span-1">
+                  <div className="sm:col-span-1 flex justify-end">
                     <button
                       type="button"
                       onClick={() => removeItem(item.id)}
@@ -327,10 +324,9 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
           </div>
 
           {/* Totals and Settings */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-gray-50 rounded-lg p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Settings</h3>
-              
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -376,10 +372,8 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
                 </div>
               </div>
             </div>
-            
-            <div className="bg-blue-50 rounded-lg p-6">
+            <div className="bg-blue-50 rounded-lg p-4 sm:p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Invoice Summary</h3>
-              
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
@@ -411,7 +405,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({ onInvoiceCreate }) => 
           <div className="flex justify-end">
             <button
               type="submit"
-              className="px-8 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+              className="px-6 sm:px-8 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors w-full sm:w-auto"
             >
               Create Invoice
             </button>

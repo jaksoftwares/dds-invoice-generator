@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
 import { Header } from './components/Header';
 import { InvoiceForm } from './components/InvoiceForm';
 import { InvoicePreview } from './components/InvoicePreview';
@@ -101,24 +103,30 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Header activeTab={activeTab} onTabChange={setActiveTab} />
-      <main className="py-8">
-        {renderContent()}
-      </main>
-      
-      {emailInvoice && (
-        <EmailModal
-          invoice={emailInvoice}
-          isOpen={isEmailModalOpen}
-          onClose={() => {
-            setIsEmailModalOpen(false);
-            setEmailInvoice(null);
-          }}
-          onSend={handleSendEmail}
-        />
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/invoice-generator" element={
+          <div className="min-h-screen bg-gray-100">
+            <Header activeTab={activeTab} onTabChange={setActiveTab} />
+            <main className="py-8">
+              {renderContent()}
+            </main>
+            {emailInvoice && (
+              <EmailModal
+                invoice={emailInvoice}
+                isOpen={isEmailModalOpen}
+                onClose={() => {
+                  setIsEmailModalOpen(false);
+                  setEmailInvoice(null);
+                }}
+                onSend={handleSendEmail}
+              />
+            )}
+          </div>
+        } />
+      </Routes>
+    </Router>
   );
 }
 

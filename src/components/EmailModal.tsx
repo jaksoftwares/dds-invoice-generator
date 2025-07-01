@@ -17,7 +17,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({
 }) => {
   const [emailData, setEmailData] = useState({
     to: invoice.client.email,
-    subject: `Invoice #${invoice.invoiceNumber} from Dovepeak Digital Solutions`,
+    subject: `Invoice #Ksh{invoice.invoiceNumber} from Dovepeak Digital Solutions`,
     message: `Dear ${invoice.client.name},
 
 Please find attached your invoice #${invoice.invoiceNumber} for the amount of $${invoice.total.toFixed(2)}.
