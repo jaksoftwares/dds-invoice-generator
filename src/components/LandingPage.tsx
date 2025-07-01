@@ -8,7 +8,7 @@ const LandingPage: React.FC = () => {
       {/* Header */}
       <header className="w-full py-6 px-4 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-3">
-          <img src="/logo192.png" alt="Dovepeak Digital Solutions Logo" className="h-10 w-10 rounded-full shadow-lg border-2 border-blue-400" />
+          <img src="/logo.jpg" alt="Dovepeak Digital Solutions Logo" className="h-10 w-10 rounded-full shadow-lg border-2 border-blue-400" />
           <span className="text-2xl font-extrabold text-slate-900 tracking-tight">Dovepeak Digital Solutions</span>
         </div>
         <nav className="hidden sm:flex space-x-6">
